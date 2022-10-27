@@ -15,11 +15,22 @@
   --global-html-color: var(--global-color-front);
   --global-html-backgroundColor: var(--global-color-back);
   --global-selection-backgroundColor: var(--global-color-front);
+  /* robot animation */
+  --robot-animation-duration: 0.75s;
+  --robot-animation-timing-function: ease-in-out;
+  --robot-animation-iteration-count: infinite;
+  --robot-animation-direction: alternate;
+
+  /* button */
+  --button-back-color: rgba(0, 0, 0, 0.2);
+
+  
 }
 
 /*------------------------------------*\
 #GENERIC
 \*------------------------------------*/
+
 
 /*
     Generic: Page
@@ -34,7 +45,11 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	background-color: var(--global-html-backgroundColor);
+  color: var(--global-html-color);
+
 }
+
 
 *,
 *:before,
@@ -43,6 +58,12 @@ html {
 }
 
 body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  flex-direction: column;
 }
 
 /*
@@ -127,25 +148,98 @@ body {
 /*------------------------------------*\
 #COMPONENTS
 \*------------------------------------*/
-
 /*
-    Component: Robot
+Component: Robot
 */
 
 .c-robot {
+  fill: white;
+  max-width: 300px;
 }
 
 .c-robot__shadow {
+  fill: black;
+  opacity: 0.2;
 }
+
 
 
 /*
     Component: Controls
 */
+.c-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  flex-direction: row;
+}
 
+.c-controls__list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.c-controls__radio {
+  display: none;
+}
+
+.c-controls__button {
+  display: inline-block;
+  padding: 8px 16px;
+  color: white;
+  background-color: transparent;
+  /* cursor: pointer; */
+  transition: background-color 0.25s ease-in-out;
+  margin: 8px;
+  border-radius: 25px;
+}
+
+.c-controls__radio:checked + .c-controls__button {
+  font-weight: bold;
+  background-color: var(--button-back-color);
+  /* background-color: #000; */
+}
+.c-controls__button--pause {
+  background-color: var(--button-back-color);
+}
+
+.c-play-icon--play{
+  display: none;
+}
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
+
+/*------------------------------------*\
+#animations
+\*------------------------------------*/
+/* #Shadow {
+  animation-name: shadowPulse;
+  animation-duration: var(--robot-animation-duration) ;
+  animation-timing-function: var(--robot-animation-timing-function);
+  animation-iteration-count: var(--robot-animation-iteration-count);
+  animation-direction: var(--robot-animation-direction);
+  transform-origin: 50% 100%;
+}
+.c-robot-css-anim #Shadow {
+  animation-name: shadowPulse;
+  animation-duration: var(--robot-animation-duration) ;
+  animation-timing-function: var(--robot-animation-timing-function);
+  animation-iteration-count: var(--robot-animation-iteration-count);
+  animation-direction: var(--robot-animation-direction);
+  transform-origin: 50% 100%;
+}
+
+#Robot{
+  animation: robotHover;
+  animation-duration: var(--robot-animation-duration) ;
+  animation-timing-function: var(--robot-animation-timing-function);
+  animation-iteration-count: var(--robot-animation-iteration-count);
+  animation-direction: var(--robot-animation-direction);
+} */
 
 /*------------------------------------*\
 #MEDIA
@@ -215,5 +309,21 @@ body {
   h2,
   h3 {
     page-break-after: avoid;
+  }
+}
+
+@keyframes shadowPulse {
+  100% {
+    transform: scale(.75);
+  }
+  
+}
+
+@keyframes robotHover {
+  0% {
+    transform: translateY(2.5%);
+  }
+  100% {
+    transform: translateY(-2.5%);
   }
 }
